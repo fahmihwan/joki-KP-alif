@@ -154,7 +154,6 @@ session_start();
 
     <script>
         $(document).ready(function() {
-
             $('#reset_speed').click(function(e) {
                 Swal.fire({
                     title: "yakin ingin reset speed awal?",

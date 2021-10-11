@@ -3,6 +3,8 @@ include './koneksi.php';
 
 $cekSubisdi = mysqli_query($conn, "SELECT id_jenis, nama_bbm, harga_jual FROM tb_jenis_bbm");
 $arr = [];
+
+
 while ($fetch = mysqli_fetch_assoc($cekSubisdi)) {
     $arr[] = $fetch;
 }
@@ -122,12 +124,6 @@ if (isset($_POST['submit'])) {
                         <input type="number" class="form-control" name="speed_awal" id="speed_awal" aria-describedby="speed_awal" readonly>
                         <button class="btn btn-danger" type="button" id="reset_speed">Reset Speed</button>
                     </div>
-                    <!-- 
-                        original
-                        <div class="mb-3">
-                        <label for="speed_awal" class="form-label"><b>Speed Awal</b></label>
-                        <input type="number" class="form-control" id="speed_awal" name="speed_awal" readonly>
-                    </div> -->
                 <?php endif; ?>
                 <div class="mb-3">
                     <label for="speed_akhir" class="form-label"><b>Speed Akhir</b></label>

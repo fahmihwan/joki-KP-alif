@@ -33,7 +33,7 @@ include 'koneksi.php';
                     while ($data = mysqli_fetch_assoc($query)) :
                     ?>
                         <tr>
-                            <td><?= $data['id_supplier'] ?></td>
+                            <td><?= $no++ ?></td>
                             <td><?= $data['tanggal']; ?></td>
                             <td><?= $data['nomor_polisi']; ?></td>
                             <td><?= $data['nama']; ?></td>

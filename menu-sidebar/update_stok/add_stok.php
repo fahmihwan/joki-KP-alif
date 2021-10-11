@@ -8,7 +8,10 @@ while ($fetch = mysqli_fetch_assoc($cekSubisdi)) {
 }
 
 $queryFk = mysqli_query($conn, "SELECT id_supplier FROM tb_supplier ORDER BY id_supplier DESC LIMIT 1");
-$fk_supplier = mysqli_fetch_assoc($queryFk)['id_supplier'];
+// $fk_supplier = mysqli_fetch_assoc($queryFk)['id_supplier'];
+
+$fk_supplier = isset(mysqli_fetch_assoc($queryFk)['id_supplier']);
+
 
 if (isset($_POST['submit'])) {
     $tgl = htmlspecialchars($_POST['tanggal']);
@@ -19,9 +22,16 @@ if (isset($_POST['submit'])) {
     $stok = mysqli_query($conn, "SELECT stok FROM tb_jenis_bbm WHERE id_jenis='$jenis_bbm'");
     $stok = mysqli_fetch_assoc($stok)['stok'];
 
-    $sqlInsert = "INSERT INTO tb_pembelian 
+    if (!$fk_supplier) {
+        echo "<script>
+            alert('data supplier anda kosong, isi terlebih dahulu');    
+            window.location.href = 'index.php?supplier=add';
+            </script>";
+    } else {
+        $sqlInsert = "INSERT INTO tb_pembelian 
     (id_pembelian, tanggal, jumlah_pemesanan, harga, fk_supplier, fk_jenis_bbm)
      VALUES ('','$tgl','$jumlah_pemesanan','$harga','$fk_supplier','$jenis_bbm');";
+    }
 
     $qty = $jumlah_pemesanan * 1000;
     $qty += $stok;
